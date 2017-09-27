@@ -41,6 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="../../lsMisc/stlsoft/include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -89,7 +90,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="..\..\..\..\..\..\Linkout\bin"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
@@ -114,12 +115,13 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="../../lsMisc/stlsoft/include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
-				DebugInformationFormat="3"
+				DebugInformationFormat="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -133,7 +135,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="1"
-				GenerateDebugInformation="true"
+				GenerateDebugInformation="false"
 				SubSystem="1"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -171,7 +173,23 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\..\lsMisc\CommandLineParser.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lsMisc\GetLastErrorString.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lsMisc\I18N.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\sdel.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lsMisc\SHMoveFile.cpp"
 				>
 			</File>
 			<File
@@ -194,6 +212,18 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath="..\..\lsMisc\stdwin32\stdwin32.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lsMisc\UrlEncode.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lsMisc\UTF16toUTF8.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -201,11 +231,39 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath="..\..\lsMisc\CommandLineParser.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lsMisc\GetLastErrorString.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lsMisc\I18N.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lsMisc\SHMoveFile.h"
+				>
+			</File>
+			<File
 				RelativePath=".\stdafx.h"
 				>
 			</File>
 			<File
+				RelativePath="..\..\lsMisc\stdwin32\stdwin32.h"
+				>
+			</File>
+			<File
 				RelativePath=".\targetver.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lsMisc\UrlEncode.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lsMisc\UTF16toUTF8.h"
 				>
 			</File>
 		</Filter>
