@@ -54,7 +54,7 @@ bool PromptForChar( const wchar_t* prompt, wchar_t& readch )
 }
 int _tmain(int argc, _TCHAR* argv[])
 {
-	CCommandLineParser parser(CaseFlag_CaseInsensitive);
+	CCommandLineParser parser(CaseFlags_Insensitive);
 	COption mainArgs(L"");
 	parser.AddOption(&mainArgs);
 
@@ -120,8 +120,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		(isPrompt ? 0 : FOF_NOCONFIRMATION) |
 		0;
 	
-	int nRet=0;
-	SHDeleteFile(sv, flags, &nRet);
+	int nRet=SHDeleteFile(sv, flags);
 	if(nRet != 0)
 	{
 		wcerr << GetSHFileOpErrorString(nRet) << endl;
