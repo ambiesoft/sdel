@@ -5,10 +5,12 @@
 
 #include "../../lsMisc/CommandLineParser.h"
 #include "../../lsMisc/SHMoveFile.h"
-#include "../../lsMisc/stdwin32/stdwin32.h"
+#include "../../lsMisc/stdosd/stdosd.h"
+
+#pragma comment(lib, "shlwapi.lib")
 
 using namespace Ambiesoft;
-using namespace stdwin32;
+using namespace stdosd;
 
 using std::wcin;
 using std::wcout;
@@ -58,16 +60,16 @@ int _tmain(int argc, _TCHAR* argv[])
 	COption mainArgs(L"");
 	parser.AddOption(&mainArgs);
 
-	bool isHelp;
-	parser.AddOption(L"/h", L"/?", 0, &isHelp);
+	bool isHelp = false;
+	parser.AddOptionRange({ L"/h", L"/?" }, 0, &isHelp);
 	
-	bool isPrompt;
+	bool isPrompt = false;
 	parser.AddOption(L"/p", 0, &isPrompt);
 
-	bool isNoPreserveParent;
+	bool isNoPreserveParent = false;
 	parser.AddOption(L"/NoPreserveParent", 0, &isNoPreserveParent);
 
-	bool isNoPreserveCurrent;
+	bool isNoPreserveCurrent = false;
 	parser.AddOption(L"/NoPreserveCurrent", 0, &isNoPreserveCurrent);
 
 	parser.Parse();
@@ -92,7 +94,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	for(size_t i=0 ; i < mainArgs.getValueCount() ;++i)
 	{
 		wstring t = mainArgs.getValue(i);
-		t = stdwin32::trimW(t, L"\\");
+		t = stdTrimEnd(t, L"\\");
 		if(t==L"." && !isNoPreserveCurrent)
 		{
 			wcerr << I18N(L"\".\" is not allowed, use /NoPreserveCurrent to do it.") << endl;
@@ -108,7 +110,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		{
 			wchar_t responce=0;
 			wstring fullt=stdGetFullPathName(t.c_str());
-			PromptForChar(string_format(I18N(L"Are you sure to sdel '%s'? "), fullt.c_str()).c_str(), responce);
+			PromptForChar(
+				stdFormat(I18N(L"Are you sure to sdel '%s'? "), fullt.c_str()).c_str(), responce);
 			if( responce != L'y' && responce != L'Y')
 				return 0;
 		}
@@ -120,7 +123,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		(isPrompt ? 0 : FOF_NOCONFIRMATION) |
 		0;
 	
-	int nRet=SHDeleteFile(sv, flags);
+	int nRet=SHDeleteFileEx(sv, flags);
 	if(nRet != 0)
 	{
 		wcerr << GetSHFileOpErrorString(nRet) << endl;
